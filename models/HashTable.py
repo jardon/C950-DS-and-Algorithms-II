@@ -2,7 +2,6 @@ import array
 
 class HashTable:
     def __init__(self, size=16):
-        self.size = size
         self.map = []
         for _ in range(size):
             self.map.append([])
