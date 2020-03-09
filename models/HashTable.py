@@ -7,7 +7,10 @@ class HashTable:
             self.map.append([])
 
     def __get_hash(self, key):
-        return int(key) % len(self.map)
+        if isinstance(key, int):
+            return int(key) % len(self.map)
+        else:
+            return ord(key[0]) % len(self.map)
 
     def add(self, key, value):
         hash = self.__get_hash(key)
@@ -25,9 +28,7 @@ class HashTable:
             return True
 
     def get(self, key):
-        hash = self.__get_hash(key)
-
-        for item in self.map[hash]:
+        for item in self.map[self.__get_hash(key)]:
             if item[0] == key:
                 return item[1]
         return None
@@ -40,5 +41,5 @@ class HashTable:
             if item[0] == key:
                 self.map[hash].pop(index)
                 return True
-            index++
+            index += 1
         return False
