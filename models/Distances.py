@@ -17,11 +17,11 @@ with open('data/distance_address.csv') as file:
 def find_closest_destination(start, destinations):
     closest_distance = 100.0
     closest_location = None
-    for distance in range(0, start):
+    for distance in [less for less in destinations if less < start]:
         if float(distance_data[start][distance]) < float(closest_distance) and distance in destinations:
             closest_location = distance
             closest_distance = distance_data[start][distance]
-    for distance in range(start + 1, len(address_data)):
+    for distance in [greater for greater in destinations if greater > start]:
         if float(distance_data[distance][start]) < float(closest_distance) and distance in destinations:
             closest_location = distance
             closest_distance = distance_data[distance][start]
