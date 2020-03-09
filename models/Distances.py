@@ -28,3 +28,6 @@ def find_closest_destination(start, destinations):
             closest_distance = distance_data[int(distance)][start]
 
     return (closest_location, closest_distance)
+
+def distance_to_home(start):
+    return float(distance_data[int(start)][0])
