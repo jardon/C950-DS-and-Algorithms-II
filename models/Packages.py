@@ -1,7 +1,7 @@
 import csv
 from .HashTable import HashTable
 
-class Reader:
+class Packages:
 
     hash_table = HashTable()
     locations = HashTable()
@@ -13,7 +13,7 @@ class Reader:
             for row in self.data:
                 self.key = row[0]
 
-                Reader.hash_table.add(self.key, [self.key, row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
+                Packages.hash_table.add(self.key, [self.key, row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
         
 
 
