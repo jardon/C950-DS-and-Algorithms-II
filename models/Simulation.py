@@ -7,7 +7,6 @@ from models.Distances import distance_to_home
 class Simulation:
 
     def __init__(self):
-        # packages = Packages()
         self.package_list = Packages().hash_table
         self.truck1_distance = 0.0
         self.truck2_distance = 0.0
