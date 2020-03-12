@@ -9,5 +9,10 @@ sim.run("16:47")
 
 print("All packages delivered in " + str(sim.get_total_distance()) + " miles")
 
-print("\n1) Package Lookup")
-print("2) ")
+while True:
+    print("\n1) Package Lookup")
+    print("2) Check State")
+    print("0) Exit Application\n")
+    print("Enter an option above:")
+    selected = input()
+
