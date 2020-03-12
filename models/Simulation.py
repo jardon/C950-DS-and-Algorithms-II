@@ -118,7 +118,7 @@ class Simulation:
             self.current_time += datetime.timedelta(minutes=1)
             if self.current_time.time() == datetime.datetime.strptime('09:05:00', '%H:%M:%S').time():
                 self.truck2_departed = True
-            if self.truck1_returned:
+            if self.truck1_returned and self.current_time.time() >= datetime.datetime.strptime('10:20:00', '%H:%M:%S').time():
                 self.truck3_departed = True
 
             if not self.truck1_returned and self.truck1_departed:
