@@ -74,13 +74,15 @@ class Simulation:
                 self.truck3_destinations.append(addressId)
                 self.truck3_priority_destinations.append(addressId)
 
-    def __unload(self, truck_list, location):
+    def __unload(self, truck_list, priority_list, location):
         for index in truck_list:
             address = Simulation.package_list.get(str(index))[1]
-            address2 = address_table.get(address)[2]
             addressId = address_table.get(address)[0]
 
-            if address == address2 and addressId == str(location):
+            if addressId == str(location):
+                truck_list.remove(index)
+                if index in priority_list:
+                    priority_list.remove(index)
                 self.package_deliveries[index] = self.current_time.time()
 
     def run(self, time):    
@@ -131,7 +133,7 @@ class Simulation:
             if self.truck1_curr_pos >= self.truck1_goal:
                 self.truck1_curr_pos -= self.truck1_goal 
                 self.truck1_pos = self.truck1_next[0]    
-                self.__unload(self.truck1_packages, self.truck1_pos)      
+                self.__unload(self.truck1_packages, self.truck1_priority, self.truck1_pos)      
                 self.truck1_destinations.remove(self.truck1_next[0])
                 if len(self.truck1_priority_destinations) > 0:
                     self.truck1_priority_destinations.remove(self.truck1_next[0])
@@ -148,7 +150,7 @@ class Simulation:
             if self.truck2_curr_pos >= self.truck2_goal:
                 self.truck2_curr_pos -= self.truck2_goal
                 self.truck2_pos = self.truck2_next[0]
-                self.__unload(self.truck2_packages, self.truck2_pos)
+                self.__unload(self.truck2_packages, self.truck2_priority, self.truck2_pos)
                 self.truck2_destinations.remove(self.truck2_next[0])
                 if len(self.truck2_priority_destinations) > 0:
                     self.truck2_priority_destinations.remove(self.truck2_next[0])
@@ -164,7 +166,7 @@ class Simulation:
             if self.truck3_curr_pos >= self.truck3_goal:
                 self.truck3_curr_pos -= self.truck3_goal
                 self.truck3_pos = self.truck3_next[0]
-                self.__unload(self.truck3_packages, self.truck3_pos)
+                self.__unload(self.truck3_packages, self.truck3_priority, self.truck3_pos)
                 self.truck3_destinations.remove(self.truck3_next[0])
                 if len(self.truck3_priority_destinations) > 0:
                     self.truck3_priority_destinations.remove(self.truck3_next[0])
