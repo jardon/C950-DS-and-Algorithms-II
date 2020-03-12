@@ -41,6 +41,10 @@ class Simulation:
         self.truck1_returned = False
         self.truck2_returned = False
         self.truck3_returned = False
+        self.truck1_departed = False
+        self.truck2_departed = False
+        self.truck3_departed = False
+        self.package_deliveries = [None] * 40
 
     def get_total_distance(self):
         return float(self.truck1_distance + self.truck2_distance + self.truck3_distance)
@@ -75,7 +79,7 @@ class Simulation:
 
     def run(self, time):    
         self.sim_end = datetime.datetime.strptime(time, '%H:%M').time()
-        current_time = datetime.datetime.strptime('08:00', '%H:%M')
+        self.current_time = datetime.datetime.strptime('08:00', '%H:%M')
         self.__build_lists()
 
         if len(self.truck1_priority_destinations) > 0:
@@ -96,16 +100,22 @@ class Simulation:
             self.truck3_next = find_closest_destination(self.truck3_pos, self.truck3_destinations)
         self.truck3_goal = float(self.truck3_next[1])
 
-        print(str(self.truck2_pos) + ", " + str(self.truck2_goal))
+        self.truck1_departed = True
 
         while True:
-            if not self.truck1_returned:
+            self.current_time += datetime.timedelta(minutes=1)
+            if self.current_time.time() == datetime.datetime.strptime('09:05:00', '%H:%M:%S').time():
+                self.truck2_departed = True
+            if self.truck1_returned:
+                self.truck3_departed = True
+
+            if not self.truck1_returned and self.truck1_departed:
                 self.truck1_curr_pos += Simulation.speed
                 self.truck1_distance += Simulation.speed
-            if not self.truck2_returned:
+            if not self.truck2_returned and self.truck2_departed:
                 self.truck2_curr_pos += Simulation.speed
                 self.truck2_distance += Simulation.speed
-            if not self.truck3_returned:
+            if not self.truck3_returned and self.truck3_departed:
                 self.truck3_curr_pos += Simulation.speed
                 self.truck3_distance += Simulation.speed
 
@@ -139,7 +149,6 @@ class Simulation:
                         self.truck2_destinations.append(0)
                         self.truck2_next = (0, distance_to_home(self.truck2_pos))
                 self.truck2_goal = float(self.truck2_next[1])
-                print(str(self.truck2_pos) + ", " + str(self.truck2_goal))
 
             if self.truck3_curr_pos >= self.truck3_goal:
                 self.truck3_curr_pos -= self.truck3_goal
