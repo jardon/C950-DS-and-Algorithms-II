@@ -20,7 +20,7 @@ class Simulation:
         self.truck1_packages = [13,14,15,16,29,30,31,34,37,40,1,4,7,39,8,32]
         self.truck2_packages = [3,18,36,38,6,10,11,12,17,20,21,22,23,24,25,26]
         self.truck3_packages = [9,19,27,28,33,35,2,5]
-        self.truck1_priority = [13,30,31,37,40]
+        self.truck1_priority = [13,14,15,16,29,30,31,34,37,40]
         self.truck2_priority = [6,20,25]
         self.truck3_priority = []
         self.truck1_destinations = []
@@ -136,7 +136,7 @@ class Simulation:
             if self.truck1_curr_pos >= self.truck1_goal:
                 self.truck1_curr_pos -= self.truck1_goal 
                 self.truck1_pos = self.truck1_next[0]    
-                self.__unload(self.truck1_packages, self.truck1_priority, self.truck1_pos)      
+                self.__unload(self.truck1_packages, self.truck1_priority, self.truck1_pos)
                 self.truck1_destinations.remove(self.truck1_next[0])
                 if len(self.truck1_priority_destinations) > 0:
                     self.truck1_priority_destinations.remove(self.truck1_next[0])
