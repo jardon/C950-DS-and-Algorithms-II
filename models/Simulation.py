@@ -112,6 +112,9 @@ class Simulation:
         self.truck1_departed = True
 
         while True:
+            if self.current_time.time() >= self.sim_end:
+                break
+
             self.current_time += datetime.timedelta(minutes=1)
             if self.current_time.time() == datetime.datetime.strptime('09:05:00', '%H:%M:%S').time():
                 self.truck2_departed = True
