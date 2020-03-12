@@ -75,23 +75,28 @@ class Simulation:
 
     def run(self, time):    
         self.sim_end = datetime.datetime.strptime(time, '%H:%M').time()
-        self.__build_lists()
         current_time = datetime.datetime.strptime('08:00', '%H:%M')
+        self.__build_lists()
 
         if len(self.truck1_priority_destinations) > 0:
             self.truck1_next = find_closest_destination(self.truck1_pos, self.truck1_priority_destinations)
         elif len(self.truck1_destinations) > 0:
             self.truck1_next = find_closest_destination(self.truck1_pos, self.truck1_destinations)
+        self.truck1_goal = float(self.truck1_next[1])
 
         if len(self.truck2_priority_destinations) > 0:
             self.truck2_next = find_closest_destination(self.truck2_pos, self.truck2_priority_destinations)
         elif len(self.truck2_destinations) > 0:
             self.truck2_next = find_closest_destination(self.truck2_pos, self.truck2_destinations)
+        self.truck2_goal = float(self.truck2_next[1])
 
         if len(self.truck3_priority_destinations) > 0:
             self.truck3_next = find_closest_destination(self.truck3_pos, self.truck3_priority_destinations)
         elif len(self.truck3_destinations) > 0:
             self.truck3_next = find_closest_destination(self.truck3_pos, self.truck3_destinations)
+        self.truck3_goal = float(self.truck3_next[1])
+
+        print(str(self.truck2_pos) + ", " + str(self.truck2_goal))
 
         while True:
             if not self.truck1_returned:
@@ -105,11 +110,12 @@ class Simulation:
                 self.truck3_distance += Simulation.speed
 
             if self.truck1_curr_pos >= self.truck1_goal:
-                self.truck1_curr_pos = 0
+                self.truck1_curr_pos -= self.truck1_goal 
                 self.truck1_pos = self.truck1_next[0]          
                 self.truck1_destinations.remove(self.truck1_next[0])
                 if len(self.truck1_priority_destinations) > 0:
                     self.truck1_priority_destinations.remove(self.truck1_next[0])
+                if len(self.truck1_priority_destinations) > 0:
                     self.truck1_next = find_closest_destination(self.truck1_pos, self.truck1_priority_destinations)
                 elif len(self.truck1_destinations) > 0:
                     self.truck1_next = find_closest_destination(self.truck1_pos, self.truck1_destinations)
@@ -117,13 +123,15 @@ class Simulation:
                         self.truck1_destinations.append(0)
                         self.truck1_next = (0, distance_to_home(self.truck1_pos))
                 self.truck1_goal = float(self.truck1_next[1])
+                
 
             if self.truck2_curr_pos >= self.truck2_goal:
-                self.truck2_curr_pos = 0
+                self.truck2_curr_pos -= self.truck2_goal
                 self.truck2_pos = self.truck2_next[0]
                 self.truck2_destinations.remove(self.truck2_next[0])
                 if len(self.truck2_priority_destinations) > 0:
                     self.truck2_priority_destinations.remove(self.truck2_next[0])
+                if len(self.truck2_priority_destinations) > 0:
                     self.truck2_next = find_closest_destination(self.truck2_pos, self.truck2_priority_destinations)
                 elif len(self.truck2_destinations) > 0:
                     self.truck2_next = find_closest_destination(self.truck2_pos, self.truck2_destinations)
@@ -131,13 +139,15 @@ class Simulation:
                         self.truck2_destinations.append(0)
                         self.truck2_next = (0, distance_to_home(self.truck2_pos))
                 self.truck2_goal = float(self.truck2_next[1])
+                print(str(self.truck2_pos) + ", " + str(self.truck2_goal))
 
             if self.truck3_curr_pos >= self.truck3_goal:
-                self.truck3_curr_pos = 0
+                self.truck3_curr_pos -= self.truck3_goal
                 self.truck3_pos = self.truck3_next[0]
                 self.truck3_destinations.remove(self.truck3_next[0])
                 if len(self.truck3_priority_destinations) > 0:
                     self.truck3_priority_destinations.remove(self.truck3_next[0])
+                if len(self.truck3_priority_destinations) > 0:
                     self.truck3_next = find_closest_destination(self.truck3_pos, self.truck3_priority_destinations)
                 elif len(self.truck3_destinations) > 0:
                     self.truck3_next = find_closest_destination(self.truck3_pos, self.truck3_destinations)
@@ -155,5 +165,3 @@ class Simulation:
 
             if len(self.truck1_destinations) < 1 and len(self.truck2_destinations) < 1 and len(self.truck3_destinations) < 1:
                 break
-        
-
