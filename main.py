@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from models.Simulation import Simulation
+import sys
 
 print("Name: Jarred Wilson")
 print("Student ID #001277133")
@@ -16,3 +17,5 @@ while True:
     print("Enter an option above:")
     selected = input()
 
+    if selected == '0':
+        sys.exit()
