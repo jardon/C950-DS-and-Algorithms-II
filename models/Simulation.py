@@ -52,28 +52,25 @@ class Simulation:
     def __build_lists(self):
         for index in self.truck1_packages:
             address = Simulation.package_list.get(str(index))[1]
-            address2 = address_table.get(address)[2]
             addressId = address_table.get(address)[0]
 
-            if address == address2 and addressId not in self.truck1_destinations:
+            if addressId not in self.truck1_destinations:
                 self.truck1_destinations.append(addressId)
                 self.truck1_priority_destinations.append(addressId)
 
         for index in self.truck2_packages:
             address = Simulation.package_list.get(str(index))[1]
-            address2 = address_table.get(address)[2]
             addressId = address_table.get(address)[0]
 
-            if address == address2 and addressId not in self.truck2_destinations:
+            if addressId not in self.truck2_destinations:
                 self.truck2_destinations.append(addressId)
                 self.truck2_priority_destinations.append(addressId)
 
         for index in self.truck3_packages:
             address = Simulation.package_list.get(str(index))[1]
-            address2 = address_table.get(address)[2]
             addressId = address_table.get(address)[0]
 
-            if address == address2 and addressId not in self.truck3_destinations:
+            if addressId not in self.truck3_destinations:
                 self.truck3_destinations.append(addressId)
                 self.truck3_priority_destinations.append(addressId)
 
