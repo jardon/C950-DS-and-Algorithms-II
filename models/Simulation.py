@@ -56,7 +56,8 @@ class Simulation:
 
             if addressId not in self.truck1_destinations:
                 self.truck1_destinations.append(addressId)
-                self.truck1_priority_destinations.append(addressId)
+                if index in self.truck1_priority:
+                    self.truck1_priority_destinations.append(addressId)
 
         for index in self.truck2_packages:
             address = Simulation.package_list.get(str(index))[1]
@@ -64,7 +65,8 @@ class Simulation:
 
             if addressId not in self.truck2_destinations:
                 self.truck2_destinations.append(addressId)
-                self.truck2_priority_destinations.append(addressId)
+                if index in self.truck2_priority:
+                    self.truck2_priority_destinations.append(addressId)
 
         for index in self.truck3_packages:
             address = Simulation.package_list.get(str(index))[1]
@@ -72,7 +74,8 @@ class Simulation:
 
             if addressId not in self.truck3_destinations:
                 self.truck3_destinations.append(addressId)
-                self.truck3_priority_destinations.append(addressId)
+                if index in self.truck3_priority:
+                    self.truck3_priority_destinations.append(addressId)
 
     def __unload(self, truck_list, priority_list, location):
         for index in truck_list:
@@ -144,8 +147,7 @@ class Simulation:
                 elif len(self.truck1_destinations) < 1 and self.truck1_next[0] != 0:
                         self.truck1_destinations.append(0)
                         self.truck1_next = (0, distance_to_home(self.truck1_pos))
-                self.truck1_goal = float(self.truck1_next[1])
-                
+                self.truck1_goal = float(self.truck1_next[1])                
 
             if self.truck2_curr_pos >= self.truck2_goal:
                 self.truck2_curr_pos -= self.truck2_goal
