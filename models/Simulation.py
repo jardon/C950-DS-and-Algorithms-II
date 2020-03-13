@@ -194,3 +194,6 @@ class Simulation:
 
             if len(self.truck1_destinations) < 1 and len(self.truck2_destinations) < 1 and len(self.truck3_destinations) < 1:
                 break
+
+    def print(self):
+        return

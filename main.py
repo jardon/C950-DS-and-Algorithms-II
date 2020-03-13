@@ -19,3 +19,11 @@ while True:
 
     if selected == '0':
         sys.exit()
+    if selected == '1':
+        print("\nEnter search criteria:")
+        input()
+    if selected == '2':
+        print("\nEnter time in 'HH:MM' format:")
+        sim.reset()
+        sim.run(input())
+        
