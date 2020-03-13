@@ -78,15 +78,19 @@ class Simulation:
                     self.truck3_priority_destinations.append(addressId)
 
     def __unload(self, truck_list, priority_list, location):
+        self.removal_list = []
         for index in truck_list:
             address = Simulation.package_list.get(str(index))[1]
             addressId = address_table.get(address)[0]
 
             if addressId == str(location):
-                truck_list.remove(index)
-                if index in priority_list:
-                    priority_list.remove(index)
+                self.removal_list.append(index)
                 self.package_deliveries[index] = self.current_time.time()
+
+        for item in self.removal_list:
+            truck_list.remove(item)
+            if item in priority_list:
+                priority_list.remove(item) 
 
     def run(self, time):    
         self.sim_end = datetime.datetime.strptime(time, '%H:%M').time()
