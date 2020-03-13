@@ -3,9 +3,13 @@ from .HashTable import HashTable
 
 class Packages:
 
+    # Static variables
+    # Holds two hash tables based off of data csvs
     hash_table = HashTable()
-    locations = HashTable()
 
+    # Constructor
+    # Only method to set up static variables
+    # O(N)
     def __init__(self):
         with open('data/package_file.csv') as file:
             self.data = csv.reader(file, delimiter=',')

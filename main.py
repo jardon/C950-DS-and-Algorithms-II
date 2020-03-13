@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+#Jarred Wilson
+#001277133
+
 from models.Simulation import Simulation
 import sys
 

@@ -1,5 +1,4 @@
 import csv
-import datetime
 from .HashTable import HashTable
 
 address_data = list(csv.reader(open('data/distance_address.csv'), delimiter=','))
