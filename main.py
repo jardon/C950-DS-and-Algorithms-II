@@ -17,16 +17,14 @@ while True:
     print("\n1) Package Lookup")
     print("2) Check State")
     print("0) Exit Application\n")
-    print("Enter an option above:")
-    selected = input()
+    print()
+    selected = input("Enter an option above: ")
 
     if selected == '0':
         sys.exit()
     if selected == '1':
-        print("\nEnter search criteria:")
-        input()
+        input("\nEnter search criteria: ")
     if selected == '2':
-        print("\nEnter time in 'HH:MM' format:")
         sim.reset()
-        sim.run(input())
-        
+        sim.run(input("\nEnter time in 'HH:MM' format: "))
+        sim.print()
