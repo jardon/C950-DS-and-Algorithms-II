@@ -226,4 +226,20 @@ class Simulation:
 
     # Print function for outputting the state of the simulation
     def print(self):
+        for index in range(1,41):
+            self.package = Simulation.package_list.get(str(index))
+            print("\nPackage ID: " + self.package[0])
+            print("Address: " + self.package[1])
+            print("City: " + self.package[2])
+            print("State: " + self.package[3])
+            print("Zip: " + self.package[4])
+            print("Deliver by: " + self.package[5])
+            print("Weight (kg): " + self.package[6])
+            print("Note: " + self.package[7])
+
+            if self.package_deliveries[index] is not None:
+                print("Delivery Status: Delivered at " + str(self.package_deliveries[index]))
+            else:
+                print("Deliver Status: Out for Delivery")
+
         return
