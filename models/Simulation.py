@@ -49,6 +49,7 @@ class Simulation:
         self.truck2_departed = False
         self.truck3_departed = False
         self.package_deliveries = [None] * 41
+        Simulation.package_list.add("9", ['9','300 State St','Salt Lake City','UT','84103','EOD','2','Wrong address listed'])
 
     # Method for getting the total distance travelled at the current state of the sim
     def get_total_distance(self):
@@ -148,6 +149,7 @@ class Simulation:
             if self.current_time.time() == datetime.datetime.strptime('09:05:00', '%H:%M:%S').time():
                 self.truck2_departed = True
             if self.truck1_returned and self.current_time.time() >= datetime.datetime.strptime('10:20:00', '%H:%M:%S').time():
+                Simulation.package_list.add("9", ["9","410 S State St","Salt Lake City","UT","84111","EOD","2","None"])
                 self.truck3_departed = True
 
             # Adds distance to trucks total distance and current location en route to next location
