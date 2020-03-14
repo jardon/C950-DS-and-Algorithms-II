@@ -23,7 +23,9 @@ while True:
     if selected == '0':
         sys.exit()
     if selected == '1':
-        input("\nEnter search criteria: ")
+        sim.reset()
+        sim.run(input("Enter time in 'HH:MM' format: "))
+        sim.print(int(input("\nEnter package ID: ")))
     if selected == '2':
         sim.reset()
         sim.run(input("\nEnter time in 'HH:MM' format: "))
