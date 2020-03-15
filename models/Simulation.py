@@ -244,7 +244,10 @@ class Simulation:
                 if self.package_deliveries[index] is not None:
                     print("Delivery Status: Delivered at " + str(self.package_deliveries[index]))
                 else:
-                    print("Deliver Status: Out for Delivery")
+                    if (int(index) in self.truck1_packages and self.truck1_departed) or (int(index) in self.truck2_packages and self.truck2_departed) or (int(index) in self.truck3_packages and self.truck3_departed):
+                        print("Delivery State: Out for Delivery")
+                    else:
+                        print("Deliver Status: At Hub")
         else:
             self.package = Simulation.package_list.get(str(id))
             print("\nPackage ID: " + self.package[0])
