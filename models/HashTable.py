@@ -2,9 +2,7 @@ import array
 
 class HashTable:
     def __init__(self, size=16):
-        self.map = []
-        for _ in range(size):
-            self.map.append([])
+        self.map = [None] * size
 
     def __get_hash(self, key):
         if isinstance(key, int):
