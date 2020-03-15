@@ -232,38 +232,22 @@ class Simulation:
         if id is None:
             for index in range(1,41):
                 self.package = Simulation.package_list.get(str(index))
-                print("\nPackage ID: " + self.package[0])
-                print("Address: " + self.package[1])
-                print("City: " + self.package[2])
-                print("State: " + self.package[3])
-                print("Zip: " + self.package[4])
-                print("Deliver by: " + self.package[5])
-                print("Weight (kg): " + self.package[6])
-                print("Note: " + self.package[7])
 
                 if self.package_deliveries[index] is not None:
-                    print("Delivery Status: Delivered at " + str(self.package_deliveries[index]))
+                    self.package.append(str(self.package_deliveries[index]))
+                elif (int(index) in self.truck1_packages and self.truck1_departed) or (int(index) in self.truck2_packages and self.truck2_departed) or (int(index) in self.truck3_packages and self.truck3_departed):
+                    self.package.append("Out for Delivery")
                 else:
-                    if (int(index) in self.truck1_packages and self.truck1_departed) or (int(index) in self.truck2_packages and self.truck2_departed) or (int(index) in self.truck3_packages and self.truck3_departed):
-                        print("Delivery State: Out for Delivery")
-                    else:
-                        print("Deliver Status: At Hub")
+                    self.package.append("At Hub")
+                print(self.package)
         else:
             self.package = Simulation.package_list.get(str(id))
-            print("\nPackage ID: " + self.package[0])
-            print("Address: " + self.package[1])
-            print("City: " + self.package[2])
-            print("State: " + self.package[3])
-            print("Zip: " + self.package[4])
-            print("Deliver by: " + self.package[5])
-            print("Weight (kg): " + self.package[6])
-            print("Note: " + self.package[7])
 
             if self.package_deliveries[id] is not None:
-                print("Delivery Status: Delivered at " + str(self.package_deliveries[id]))
+                self.package.append(str(self.package_deliveries[id]))
+            elif (int(id) in self.truck1_packages and self.truck1_departed) or (int(id) in self.truck2_packages and self.truck2_departed) or (int(id) in self.truck3_packages and self.truck3_departed):
+                self.package.append("Out for Delivery")
             else:
-                if (int(id) in self.truck1_packages and self.truck1_departed) or (int(id) in self.truck2_packages and self.truck2_departed) or (int(id) in self.truck3_packages and self.truck3_departed):
-                    print("Delivery State: Out for Delivery")
-                else:
-                    print("Deliver Status: At Hub")
+                self.package.append("At Hub")
+            print(self.package)
         return
