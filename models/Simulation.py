@@ -240,6 +240,7 @@ class Simulation:
                 else:
                     self.package.append("At Hub")
                 print(self.package)
+                self.package.pop()
         else:
             self.package = Simulation.package_list.get(str(id))
 
@@ -250,4 +251,5 @@ class Simulation:
             else:
                 self.package.append("At Hub")
             print(self.package)
+            self.package.pop()
         return
